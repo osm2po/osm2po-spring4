@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.cm.tut.spring</groupId>
+    <artifactId>osm2po-spring4web</artifactId>
+    <packaging>war</packaging>
+
+    <version>0.0.1-SNAPSHOT</version>
+    <name>osm2po Spring4 WebApp</name>
+    <url>http://osm2po.de</url>
+
+    <properties>
+        <spring.version>4.3.0.RELEASE</spring.version>
+        <osm2po.version>5.1.26</osm2po.version>
+        <jdk.version>1.7</jdk.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>osm2po.de</id>
+            <name>OSM2PO-FTP-Repository</name>
+            <url>http://osm2po.de/mvn</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- SERVLET: only for compile if Tomcat not set as target -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- JSTL: However, will be needed -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <dependency> <!-- OSM2PO -->
+            <groupId>de.cm.osm2po</groupId>
+            <artifactId>osm2po-core</artifactId>
+            <version>${osm2po.version}</version>
+        </dependency>
+
+        <dependency> <!-- SPRING MVC and CORE -->
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency> <!-- JDBC and TX -->
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency> <!-- JSON -->
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.4.1</version>
+        </dependency>
+
+        <dependency> <!-- DB -->
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1204-jdbc4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>osm2po</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+            <!-- http://maven.apache.org/plugins/maven-eclipse-plugin/plugin-info.html -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.10</version>
+                <configuration>
+                    <projectNameTemplate>osm2po-spring4web</projectNameTemplate>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                    <wtpversion>2.0</wtpversion>
+                    <wtpContextName>osm2po</wtpContextName> <!-- for http://.../osm2po/... -->
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+</project>
