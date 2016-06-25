@@ -13,6 +13,8 @@
 
     <mvc:annotation-driven />
     <context:component-scan base-package="de.cm.osm2po.spring4" />
+    
+    <import resource="classpath:db-context.xml"/>
 
     <bean id="viewResolver"
         class="org.springframework.web.servlet.view.UrlBasedViewResolver">

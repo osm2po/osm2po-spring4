@@ -24,15 +24,13 @@
     </repositories>
 
     <dependencies>
-        <!-- SERVLET: only for compile if Tomcat not set as target -->
-        <dependency>
+        <dependency> <!-- SERVLET: only for compile if Tomcat not set as target -->
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
-        <!-- JSTL: However, will be needed -->
-        <dependency>
+        <dependency> <!-- JSTL: However, will be needed -->
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
@@ -91,7 +89,7 @@
             </plugin>
 
             <plugin>
-            <!-- http://maven.apache.org/plugins/maven-eclipse-plugin/plugin-info.html -->
+                <!-- http://maven.apache.org/plugins/maven-eclipse-plugin/plugin-info.html -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>2.10</version>

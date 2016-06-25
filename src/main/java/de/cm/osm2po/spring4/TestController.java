@@ -1,14 +1,20 @@
 package de.cm.osm2po.spring4;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -24,6 +30,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.cm.osm2po.Config;
+import de.cm.osm2po.misc.Utils;
+import de.cm.osm2po.misc.WkbUtils;
 import de.cm.osm2po.model.LatLon;
 import de.cm.osm2po.service.GeoJson;
 
@@ -31,6 +39,8 @@ import de.cm.osm2po.service.GeoJson;
 @SessionAttributes("foo")
 public class TestController {
     private Config config;
+    
+    @Autowired private DataSource dataSource;
     
     @Autowired private MessageSource messageSource; 
 
@@ -84,9 +94,32 @@ public class TestController {
         }
         return "foo";
     }
+
+    
+    // Muss laut Doku public sein
+    @Transactional
+    public String someDbStuff() {
+        try {
+            // DataSourceUtils instead of dataSource.getConnection()
+            Connection con = DataSourceUtils.getConnection(dataSource);
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM hh_2po_4pgr WHERE id=1");
+            rs.next();
+            String way = rs. getString("geom_way");
+            Object wkbObj = WkbUtils.fromWkb(Utils.hexToBytes(way));
+            stm.close();
+            return wkbObj.toString();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
     @GetMapping("/foo")
     String foo(ModelMap model) {
+        System.out.println(someDbStuff());
+        
         if (null == model.get("foo")) { // @SessionAttributes("foo") s.o.
             model.addAttribute("foo", this.toString()
                     + " " + testComponent1.get4711()
