@@ -36,6 +36,7 @@
         <property name="defaultLocale" value="en" />
     </bean>
 
+    <!-- useful with SessionLocaleResolver -->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**" />
