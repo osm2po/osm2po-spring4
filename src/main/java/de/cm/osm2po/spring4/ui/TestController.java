@@ -1,4 +1,4 @@
-package de.cm.osm2po.spring4;
+package de.cm.osm2po.spring4.ui;
 
 import java.util.Locale;
 
@@ -26,6 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.cm.osm2po.Config;
 import de.cm.osm2po.model.LatLon;
 import de.cm.osm2po.service.GeoJson;
+import de.cm.osm2po.spring4.bo.Account;
+import de.cm.osm2po.spring4.service.TestService;
 
 @Controller
 @SessionAttributes("foo")
@@ -56,8 +58,14 @@ public class TestController {
         return "Hello " + name;
     }
 
-    @GetMapping(value="/account", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value="/account", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody Account account(ModelMap model) {
+        try {
+//            System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new Account();
     }
     

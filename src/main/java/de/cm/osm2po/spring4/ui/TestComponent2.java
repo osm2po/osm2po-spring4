@@ -1,4 +1,4 @@
-package de.cm.osm2po.spring4;
+package de.cm.osm2po.spring4.ui;
 
 import org.springframework.stereotype.Component;
 
