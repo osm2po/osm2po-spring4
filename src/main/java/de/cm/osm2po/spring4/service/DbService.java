@@ -4,19 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import de.cm.osm2po.spring4.dao.TestDao;
+import de.cm.osm2po.spring4.dao.DbDao;
 
 @Service
-public class TestService {
+public class DbService {
 
-    @Autowired TestDao testDao;
+    @Autowired DbDao dao;
     
-    @Transactional(
-            transactionManager="transactionManager"/*default*/,
-            rollbackFor=Throwable.class)
+    //Defaults to: transactionManager="transactionManager"
+    @Transactional(rollbackFor=Throwable.class)
     public void doSomeDbTx() throws Throwable {
-        testDao.doSomeDbInsert();
-//        testDao.doSthWrong();
+        dao.doSomeDbInsert();
     }
     
 }

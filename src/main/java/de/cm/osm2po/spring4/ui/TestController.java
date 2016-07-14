@@ -27,7 +27,7 @@ import de.cm.osm2po.Config;
 import de.cm.osm2po.model.LatLon;
 import de.cm.osm2po.service.GeoJson;
 import de.cm.osm2po.spring4.bo.Account;
-import de.cm.osm2po.spring4.service.TestService;
+import de.cm.osm2po.spring4.service.DbService;
 
 @Controller
 @SessionAttributes("foo")
@@ -36,19 +36,19 @@ public class TestController {
     
     @Autowired private MessageSource messageSource; 
     @Autowired private TestComponent1 testComponent1;
-    @Autowired private TestService testService;
+    @Autowired private DbService dbService;
     
     private TestComponent2 testComponent2;
     @Autowired public TestController(TestComponent2 testComponent2) {
         this.testComponent2 = testComponent2;
     }
     
-    @PostConstruct
+    @PostConstruct // javax.annotation
     void init() {
         (this.config = new Config()).getLog().unlock().info("osm2po configured");;
     }
     
-    @PreDestroy
+    @PreDestroy // javax.annotation
     void clean() {
         this.config.close();
     }
@@ -113,7 +113,7 @@ public class TestController {
         Account account = null;
         
         try {
-            testService.doSomeDbTx();
+            dbService.doSomeDbTx();
             account = om.readValue(json, Account.class);
         } catch (Throwable t) {
             t.printStackTrace();

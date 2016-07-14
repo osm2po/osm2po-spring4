@@ -16,6 +16,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -27,10 +28,9 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-// <mvc:annotation-driven />
-@Configuration
+@Configuration // even works without!
 
-// <context:component-scan base-package="com.mkyong.helloworld.web" />
+// <mvc:annotation-driven />
 @EnableWebMvc
 
 // <context:component-scan base-package="de.cm.osm2po.spring4" />
@@ -48,12 +48,10 @@ import org.springframework.web.servlet.view.JstlView;
 // <tx:annotation-driven transaction-manager="txManager" proxy-target-class="false" />
 @EnableTransactionManagement(proxyTargetClass=false) // false is default
 
-public class RootContext extends WebMvcConfigurerAdapter {
+public class WebAppContext extends WebMvcConfigurerAdapter {
 
     @Autowired
     private Environment env;
-    
-    
     
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -78,7 +76,7 @@ public class RootContext extends WebMvcConfigurerAdapter {
         return viewResolver;
 
     }
-
+    
     /*---------------------------------------------------------------------------------------------------------
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basename" value="classpath:messages" />
@@ -104,6 +102,11 @@ public class RootContext extends WebMvcConfigurerAdapter {
         resolver.setDefaultLocale(new Locale("en"));
         return resolver;
     }
+
+    @Bean
+    public HandlerInterceptor authInterceptorAdapter() {
+        return new AuthInterceptor();
+    }
     
     /*--------------------------------------------------------------------------------
     <mvc:interceptors>
@@ -120,6 +123,7 @@ public class RootContext extends WebMvcConfigurerAdapter {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
         interceptor.setParamName("lang");
         registry.addInterceptor(interceptor);
+        registry.addInterceptor(authInterceptorAdapter());
     }
 
     /*----------------------------------------------------------------------------------------
@@ -153,6 +157,4 @@ public class RootContext extends WebMvcConfigurerAdapter {
         return new DataSourceTransactionManager(dbSource());
     }
     
-    
-
 }

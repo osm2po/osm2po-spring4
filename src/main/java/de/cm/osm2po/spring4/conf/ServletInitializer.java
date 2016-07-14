@@ -5,23 +5,23 @@ import javax.servlet.ServletException;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class DispatcherServlet extends AbstractAnnotationConfigDispatcherServletInitializer{
+public class ServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
 
     @Override
     public void onStartup(ServletContext servletContext)
             throws ServletException {
-        registerServletFilter(servletContext, new AuthFilter());
         super.onStartup(servletContext);
+//        registerServletFilter(servletContext, new AuthFilter());
     }
     
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {RootContext.class};
+        return null;
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return null;
+        return new Class[] {WebAppContext.class};
     }
 
     @Override

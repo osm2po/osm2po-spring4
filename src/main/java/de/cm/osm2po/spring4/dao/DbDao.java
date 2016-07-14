@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 @Component
 @Repository
-public class TestDao {
+public class DbDao {
 
     @Autowired private DataSource dataSource;
     
