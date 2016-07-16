@@ -54,7 +54,7 @@ public class TestController {
     }
     
     @RequestMapping(value="/hello/{name}", method=RequestMethod.GET)
-    String hello(@PathVariable String name) {
+    @ResponseBody String hello(@PathVariable String name) {
         return "Hello " + name;
     }
 

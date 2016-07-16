@@ -30,9 +30,8 @@ public class Osm2poService {
 
         File graphFile = new File(graphFilePath);
         
-        de.cm.osm2po.logging.Log log2 =
-                new de.cm.osm2po.logging.Log().addLogWriter(new LogJclWriter());
-        graph = new Graph(graphFile, log2, Graph.SUPPORT_LATLON, true, null);
+        graph = new Graph(graphFile,
+                LogJclWriter.logInstance(), Graph.SUPPORT_LATLON, true, null);
     }
     
     @PreDestroy

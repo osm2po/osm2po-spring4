@@ -11,7 +11,7 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
     public void onStartup(ServletContext servletContext)
             throws ServletException {
         super.onStartup(servletContext);
-//        registerServletFilter(servletContext, new AuthFilter());
+        registerServletFilter(servletContext, new ServletFilter());
     }
     
     @Override
