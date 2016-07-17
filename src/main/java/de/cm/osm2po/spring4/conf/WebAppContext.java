@@ -108,6 +108,8 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
         return new AuthInterceptor();
     }
     
+    
+    
     /*--------------------------------------------------------------------------------
     <mvc:interceptors>
         <mvc:interceptor>
@@ -154,7 +156,11 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
     ---------------------------------------------------------------------------------------------*/
     @Bean(name="transactionManager") // default
     public PlatformTransactionManager txManager() {
-        return new DataSourceTransactionManager(dbSource());
+        DataSource dataSource = dbSource();
+        // dbSource() is actually the same instance as the Bean above.
+        // Spring ensures this by proxying this class and comparing
+        // Bean-Method-Names.
+        return new DataSourceTransactionManager(dataSource);
     }
     
 }

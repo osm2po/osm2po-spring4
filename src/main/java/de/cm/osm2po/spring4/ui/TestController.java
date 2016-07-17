@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,8 +55,16 @@ public class TestController {
         this.config.close();
     }
     
+    
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseBody String handleIllegalArgument(HttpServletResponse response) {
+        return "Illegal Argument";
+    }     
+    
     @RequestMapping(value="/hello/{name}", method=RequestMethod.GET)
     @ResponseBody String hello(@PathVariable String name) {
+        if ("hello".equals(name))
+            throw new IllegalArgumentException();
         return "Hello " + name;
     }
 
