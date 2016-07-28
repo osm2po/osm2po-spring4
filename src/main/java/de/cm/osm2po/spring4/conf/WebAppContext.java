@@ -1,7 +1,9 @@
 package de.cm.osm2po.spring4.conf;
 
 import java.util.Locale;
+import java.util.Properties;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.MutablePropertySources;
+import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -27,6 +32,9 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+
+import de.cm.osm2po.Config;
+import de.cm.osm2po.misc.Props;
 
 @Configuration // even works without!
 
@@ -52,6 +60,16 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
 
     @Autowired
     private Environment env;
+    
+    @PostConstruct
+    private void addOsm2poConfigProps() {
+        if (env instanceof ConfigurableEnvironment) {
+            MutablePropertySources sources = ((ConfigurableEnvironment) env).getPropertySources();
+            Config config = new Config(null);
+            PropertiesPropertySource pps = new PropertiesPropertySource("osm2poConfig", config.getProps());
+            sources.addLast(pps);
+        }
+    }
     
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

@@ -28,6 +28,9 @@ public class Osm2poService {
         String graphFilePath = env.getProperty("osm2po.graphfile");
         log.info(graphFilePath);
 
+        String p = env.getProperty("wtr.flagList");
+        log.info(p);
+        
         File graphFile = new File(graphFilePath);
         
         graph = new Graph(graphFile,
