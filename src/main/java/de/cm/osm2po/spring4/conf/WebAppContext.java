@@ -1,7 +1,6 @@
 package de.cm.osm2po.spring4.conf;
 
 import java.util.Locale;
-import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -34,7 +33,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import de.cm.osm2po.Config;
-import de.cm.osm2po.misc.Props;
 
 @Configuration // even works without!
 
