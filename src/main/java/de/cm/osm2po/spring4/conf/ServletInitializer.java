@@ -40,7 +40,7 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
                 (DispatcherServlet) super.createDispatcherServlet(servletAppContext);
         // Global exception not thrown by default - WTF
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
-        // Alternative: Override noHandlerFound(...) of DS
+        // Alternative: Override noHandlerFound(...) of DispatcherServlet itself
         return dispatcherServlet;
     }
     

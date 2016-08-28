@@ -14,6 +14,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DbDao {
 
+    /*
+    CREATE TABLE persons
+    (
+      id integer NOT NULL,
+      name text NOT NULL,
+      CONSTRAINT persons_pkey PRIMARY KEY (id)
+    )
+    */
+    
     @Autowired private DataSource dataSource;
     
     public void doSomeDbInsert() throws SQLException{
