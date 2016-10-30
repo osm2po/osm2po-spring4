@@ -33,7 +33,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import de.cm.osm2po.Config;
-import de.cm.osm2po.logging.LogJclWriter;
 
 @Configuration // even works without!
 

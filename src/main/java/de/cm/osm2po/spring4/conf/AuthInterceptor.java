@@ -37,11 +37,9 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                 return false;
             } else {
                 String up = xAuth.split(" ")[1].trim();
-                System.out.println(new String(Base64Utils.decodeFromString(up)));
+                log.info("Auth: " + new String(Base64Utils.decodeFromString(up)));
             }
        
-            System.out.println(request.getRemoteHost());
-            
             // Create our Authentication and let Spring know about it
             //        Authentication auth = new UsernamePasswordAuthenticationToken("user", "pass");
             //        SecurityContextHolder.getContext().setAuthentication(auth);
