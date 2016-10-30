@@ -79,6 +79,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+        	<groupId>org.keycloak</groupId>
+        	<artifactId>keycloak-servlet-filter-adapter</artifactId>
+        	<version>2.3.0.Final</version>
+        </dependency>
     </dependencies>
 
     <build>
