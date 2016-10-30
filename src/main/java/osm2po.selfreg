@@ -3,3 +3,4 @@ log.0.class=de.cm.osm2po.logging.LogJclWriter
 log.1.class=de.cm.osm2po.logging.Log2poFileWriter
 log.1.file=[catalina.base]/logs/osm2po.log
 log.1.level=debug
+config= 

@@ -33,6 +33,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import de.cm.osm2po.Config;
+import de.cm.osm2po.logging.LogJclWriter;
 
 @Configuration // even works without!
 
@@ -63,7 +64,9 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
     private void addOsm2poConfigProps() {
         if (env instanceof ConfigurableEnvironment) {
             MutablePropertySources sources = ((ConfigurableEnvironment) env).getPropertySources();
-            Config config = new Config(null);
+            Config config = new Config();
+            config.getLog().unlock(); // flush alreary recorded logs and activate immediate logging
+            
             PropertiesPropertySource pps = new PropertiesPropertySource("osm2poConfig", config.getProps());
             sources.addLast(pps);
         }
