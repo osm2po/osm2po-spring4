@@ -60,10 +60,13 @@
             <version>${spring.version}</version>
         </dependency>
 
+		<!-- CAUTION there are incompatible versions !!!!!!
+			http://stackoverflow.com/questions/34721851/spring-4-2-3-and-fasterxml-jackson-2-7-0-are-incompatible/34742244
+		 -->
         <dependency> <!-- JSON Autodetected by @EnableWebMvc -->
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.4.1</version>
+            <version>2.6.5</version>
         </dependency>
 
         <dependency> <!-- DB -->
