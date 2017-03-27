@@ -48,9 +48,10 @@ import de.cm.osm2po.logging.LogJclWriter;
         })
 
 // Will be autowired into Environment env. See below.
+// The order is important, as the last one wins
 @PropertySource(ignoreResourceNotFound=true, value={
-        "${catalina.base/conf/db.properties}",
-        "classpath:db.properties"})
+        "classpath:db.properties",
+        "file:${catalina.base}/conf/db.properties"})
 
 // <tx:annotation-driven transaction-manager="txManager" proxy-target-class="false" />
 @EnableTransactionManagement(proxyTargetClass=false) // false is default
