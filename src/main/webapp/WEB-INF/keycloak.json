@@ -1,0 +1,17 @@
+{
+	"realm": "guest",
+	"resource": "account",
+	"realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAilddtI9BG117pnKcRgeYSrQJhVWDga73wnHzjkBKQQ7Uz/XY7aWVkWnvghp4RChl/F7UPRAdLH6GIx6lyaCG/vhXMINXkFPo6vdRYWfLT+6nIrt7e/3QADDjOMICHhN7pY6WzMy2oGDtNMQwUmjz9F/LpC/BR8nFsIzG8aWRycK94aY/nQdyLf3kLwAdSpPGuGSCcFAXw7obFiObQerb5dr9EfJF8IQyzXPtGoLuOyITfPj5DClFOVeY6RxAP2SJUh0yJyxJiL+wQatx61RAjOHLKoYSZvtszEBN9r8UMDlkee1LpT++cwMUCxpVcvbSv91ZDnxHnSJsOVcuuLDZ5wIDAQAB",
+	"auth-server-url": "http://localhost:8180/auth",
+	"ssl-required": "external",
+	"use-resource-role-mappings": false,
+	"enable-cors": true,
+	"cors-max-age": 1000,
+	"cors-allowed-methods": "POST, PUT, DELETE, GET",
+	"bearer-only": false,
+	"enable-basic-auth": true,
+	"expose-token": true,
+    "credentials": {
+        "secret": "0b58af93-7286-4389-92dd-9ca7c67e319f"
+    }
+}

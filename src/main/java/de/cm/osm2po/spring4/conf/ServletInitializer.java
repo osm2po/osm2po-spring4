@@ -3,6 +3,7 @@ package de.cm.osm2po.spring4.conf;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+import org.keycloak.adapters.servlet.KeycloakOIDCFilter;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.FrameworkServlet;
@@ -15,6 +16,9 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
             throws ServletException {
         super.onStartup(servletContext);
         registerServletFilter(servletContext, new ServletFilter());
+        // org.keycloak.adapters.servlet.KeycloakOIDCFilter
+        KeycloakOIDCFilter kcFilter = new KeycloakOIDCFilter();
+        registerServletFilter(servletContext, kcFilter);
     }
     
     @Override

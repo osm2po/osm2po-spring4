@@ -127,7 +127,6 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
     }
     
     
-    
     /*--------------------------------------------------------------------------------
     <mvc:interceptors>
         <mvc:interceptor>
@@ -143,7 +142,9 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
         interceptor.setParamName("lang");
         registry.addInterceptor(interceptor);
-        registry.addInterceptor(authInterceptorAdapter());
+        if (Boolean.valueOf(env.getProperty("useBaseAuth"))) {
+        	registry.addInterceptor(authInterceptorAdapter());
+        }
     }
 
     /*----------------------------------------------------------------------------------------
